@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail</title>
+    <script src="https://cdn.tailwindcss.com" defer></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js" defer></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js" defer></script>
+</head>
+
+<body>
+    <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+        <div class="px-3 py-3 lg:px-5 lg:pl-3">
+            <div class="flex items-center justify-between w-full">
+                <div class="flex items-center justify-start">
+                    <a href="/" class="flex items-center justify-center max-[638px]:mx-5 max-[638px]:w-full">
+                        <ion-icon name="bag-handle-outline" class="h-8 mr-3 text-3xl"></ion-icon>
+                        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">E-Shop</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section class="text-gray-700 body-font overflow-hidden bg-white">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="lg:w-4/5 mx-auto flex flex-wrap">
+                <img alt="ecommerce" class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200"
+                    src=<%=Detail.Image_Url%>>
+                <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+                    <h2 class="text-sm title-font text-gray-500 tracking-widest">
+                        <%=Detail.Type%>
+                    </h2>
+                    <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">
+                        <%=Detail.name%>
+                    </h1>
+                    <hr class="my-2">
+                    <p class="leading-relaxed">
+                        <%=Detail.description%>
+                    </p>
+
+                    <div class="flex my-5 items-center justify-between">
+                        <div class="flex flex-col my-4">
+                            <span class="title-font font-medium text-2xl text-gray-900">
+                                Rs. <%=Detail.sell_price%>
+                            </span>
+                            <span class="title-font font-medium text-2xl text-gray-900">Quantity : <%=Detail.Qty%>
+                            </span>
+                        </div>
+                        <div>
+                            <a href="/Customer/Buy/<%=Detail.id%>">
+                                <button
+                                    class="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded my-4">Buy</button>
+                            </a>
+                            <% if(!isAdded) {%>
+                                <a href="/Customer/Add/<%=Detail.id%>">
+                                    <button
+                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">Add
+                                        to Cart</button>
+                                </a>
+                                <%}else{%>
+                                    <a href="/Remove/Cart/<%=Detail.id%>">
+                                        <button
+                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">Remove
+                                            from Cart</button>
+                                    </a>
+                                    <%}%>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

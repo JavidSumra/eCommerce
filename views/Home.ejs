@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Shop</title>
+
+    <script src="https://cdn.tailwindcss.com" defer></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js" defer></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js" defer></script>
+</head>
+
+<body>
+    <%-include ("./Partials/Navbar.ejs",{User})%>
+        <%-include ("./Partials/Slider.ejs",{Banners:BanerList})%>
+            <%-include ("./Partials/Category.ejs")%>
+                <div class="flex items-center justify-between flex-wrap m-8">
+                    <%-include ("./Partials/Card.ejs",{Admin:false,List:getProductList})%>
+                </div>
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <script src="https://cdn.tailwindcss.com" defer></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js" defer></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js" defer></script>
+</head>
+
+<body>
+    <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+        <div class="px-3 py-3 lg:px-5 lg:pl-3">
+            <div class="flex items-center justify-between w-full">
+                <div class="flex items-center justify-start">
+                    <a href="/" class="flex items-center justify-center max-[638px]:mx-5 max-[638px]:w-full">
+                        <ion-icon name="bag-handle-outline" class="h-8 mr-3 text-3xl"></ion-icon>
+                        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">E-Shop</span>
+                    </a>
+                    <div class="text-2xl w-full mx-32 hidden md:block font-bold">Your Cart</div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section class="text-gray-700 body-font overflow-hidden bg-white">
+        <div class="container px-5 py-24 mx-auto">
+            <% if(cart.length>0){%>
+                <%cart.map((item,index)=>{%>
+                    <div
+                        class="w-full max-w-sm  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 hover:shadow-2xl duration-300 max-[639px]:my-10 max-[639px]:justify-center my-4">
+
+                        <a href="/SeeItem/<%=item.id%>">
+                            <img class="rounded-t-lg" src='<%=item.Image_Url%>' alt="product image" />
+                        </a>
+                        <div class="px-5 pb-5 pt-5">
+                            <a href="#">
+                                <h5
+                                    class="text-sm font-semibold tracking-tight text-gray-900 dark:text-white flex-wrap flex">
+                                    <%=item.name%>
+                                </h5>
+                            </a>
+
+                            <div class="flex items-center justify-between">
+                                <span class="text-xl font-bold text-gray-900 dark:text-white flex flex-col">
+                                    Rs. <%=item.sell_price%>
+                                        <span>
+                                            Qty: <%=item.Qty%>
+                                        </span>
+                                </span>
+                                <a href="/Customer/Buy/<%=item.id%>">
+                                    <button
+                                        class="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded my-4">Buy</button>
+                                </a>
+
+
+                                <button onclick="deleteCart(<%=getCart[index].id%>)"
+                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">Remove
+                                    from Cart</button>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <%})%>
+                        <%}else{%>
+                            <div class="flex items-center justify-center flex-col flex-wrap ">
+                                <div class="text-7xl"><ion-icon name="cart-outline"></ion-icon></div>
+                                <div class="text-3xl font-bold text-center">Your Cart is Empty</div>
+                            </div>
+                            <%}%>
+        </div>
+    </section>
+    <script>
+        const deleteCart = (id) => {
+            let response = fetch(`/Remove/Cart/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            if (response) {
+                window.location.reload()
+            }
+            else {
+                throw new Error("Failed To Delete")
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+</head>
+
+<body>
+    <%-include ("./Partials/AdminNav.ejs",{Title:"Provide Product Detail"})%>
+        <%-include ("./Partials/Notification.ejs")%>
+            <div class="m-10">
+                <div
+                    class=" p-4 md:mt-20 mt-20  sm:ml-64 max-w-4xl  mx-auto bg-gray-600 rounded-md shadow-md dark:bg-gray-800 ">
+                    <h1 class="text-xl font-bold text-white capitalize dark:text-white">Add Product</h1>
+                    <form action="/Admin/ProductData" method="post">
+                        <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+                            <div>
+                                <label class="text-white dark:text-gray-200" for="username">Product Name</label>
+                                <input id="username" name="productName" type="text"
+                                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                                    required>
+                            </div>
+
+                            <div>
+                                <label class="text-white dark:text-gray-200" for="passwordConfirmation">Product
+                                    Description</label>
+                                <textarea id="textarea" type="textarea" name="description"
+                                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                                    required></textarea>
+                            </div>
+
+                            <div>
+                                <label class="text-white dark:text-gray-200" for="password">Image Url</label>
+                                <input id="password" type="text" name="imgUrl"
+                                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                                    required>
+                            </div>
+
+                            <div>
+                                <label class="text-white dark:text-gray-200" for="passwordConfirmation">
+                                    Quantity</label>
+                                <input id="passwordConfirmation" type="number" name="qty"
+                                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                                    required>
+                            </div>
+                            <div>
+                                <label class="text-white dark:text-gray-200" for="passwordConfirmation">Sell
+                                    Price</label>
+                                <input id="color" type="number" name="sell_price"
+                                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                                    required>
+                            </div>
+                            <div>
+                                <label class="text-white dark:text-gray-200" for="b_price">Buy Price</label>
+                                <input id="b_price" type="number" name="buy_price"
+                                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                                    required>
+                            </div>
+                            <div>
+                                <label class="text-white dark:text-gray-200" for="cat">Type/Category</label>
+                                <input id="cat" type="text" name="category"
+                                    class="block w-full py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                                    required>
+                            </div>
+
+                            <div class="flex justify-end mt-6 w-full">
+                                <button
+                                    class="w-full px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">Save</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+</body>
+
+</html>
