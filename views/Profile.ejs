@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Profile</title>
+</head>
+
+<body>
+    <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+        <div class="px-3 py-3 lg:px-5 lg:pl-3">
+            <div class="flex items-center justify-between w-full">
+                <div class="flex items-center justify-start">
+                    <a href="/" class="flex items-center justify-center max-[638px]:mx-5 max-[638px]:w-full">
+                        <ion-icon name="bag-handle-outline" class="h-8 mr-3 text-3xl"></ion-icon>
+                        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">E-Shop</span>
+                    </a>
+                    <div class="text-2xl w-full mx-32 hidden md:block font-bold">Hey <%=user.name%>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="flex mt-8 flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <div
+            class="w-full bg-gray-100 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                <a href="/" class="flex items-center justify-center w-full">
+                    <ion-icon name="bag-handle-outline" class="h-8 mr-3 text-3xl"></ion-icon>
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">E-Shop</span>
+                </a>
+                <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                    Update Profile
+                </h1>
+                <form class="space-y-4 md:space-y-6" action="/User/UpdateData" method="post">
+                    <div>
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
+                            Name</label>
+                        <input type="text" name="userName" id="name" onkeyup="check()"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#4f46e5] focus:border-[#4f46e5] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            value="<%=user.name%>" required="">
+                    </div>
+                    <div>
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
+                            email</label>
+                        <input type="email" name="email" id="email" onkeyup="check()"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#4f46e5] focus:border-[#4f46e5] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            value="<%=user.email%>" required="">
+                    </div>
+
+                    <button type="submit" disabled id="submitBtn"
+                        class="w-full text-white bg-[#040407] cursor-not-allowed hover:bg-[#4338ca] focus:ring-4 focus:outline-none focus:ring-[#a5b4fc] font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#4f46e5] dark:hover:bg-[#4338ca] dark:focus:ring-[#3730a3]">Update
+                        an Account</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        const check = () => {
+            let Name = document.querySelector("#name"),
+                email = document.querySelector("#email"),
+                btn = document.querySelector("#submitBtn");
+            const userName = '<%=user.name%>',
+                userEmail = '<%=user.email %>';
+            if ((Name.value !== userName) || (email.value != userEmail)) {
+                console.log("Changed")
+                btn.removeAttribute("disabled")
+                btn.classList.remove("cursor-not-allowed")
+            }
+            else {
+                btn.setAttribute("disabled", true)
+                btn.classList.add("cursor-not-allowed")
+            }
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js" defer></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js" defer></script>
+</body>
+
+</html>

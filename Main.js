@@ -231,6 +231,19 @@ app.get(
     }
   }
 );
+
+app.get(
+  "/User/Profile",
+  connectEnsure.ensureLoggedIn({ redirectTo: "/" }),
+  async (req, res) => {
+    try {
+      let userData = await User.findByPk(req.user.id);
+      res.render("Profile", { user: userData });
+    } catch (error) {
+      console.log("Error While Fetching User Profile:" + error);
+    }
+  }
+);
 app.get(
   "/Customer/Add/:id",
   connectEnsure.ensureLoggedIn({ redirectTo: "/" }),
@@ -256,7 +269,12 @@ app.get(
       let itemDetail = await Product.findByPk(req.params.id);
       let updatedQty = itemDetail.Qty - 1;
       await itemDetail.updateProductQty(updatedQty);
-      await Cart.updatePurchase(req.user.id, req.params.id);
+      let CartProduct = await Cart.getCartProduct(req.params.id);
+      let updatedProduct = await CartProduct.updatePurchase(
+        String(req.user.id),
+        String(req.params.id)
+      );
+      console.log(updatedProduct);
       res.redirect("back");
     } catch (error) {
       console.log(`Error During Buy Operation : ${error}`);
@@ -353,6 +371,20 @@ app.post(
     }
   }
 );
+
+app.post("/User/UpdateData", async (req, res) => {
+  try {
+    let user = await User.findByPk(req.user.id);
+    let update_User_Data = await user.updateData(
+      req.body.userName,
+      req.body.email
+    );
+    console.log(update_User_Data);
+    res.redirect("/");
+  } catch (error) {
+    console.log("Error While Updating User Data:", error);
+  }
+});
 app.post(
   "/Dash/AddBanner",
   connectEnsure.ensureLoggedIn({ redirectTo: "/User/Login" }),

@@ -16,14 +16,21 @@
                 <span class="text-xl font-bold text-gray-900 dark:text-white flex flex-col">
                     Rs. <%=item.sell_price%>
                         <span>
-                            Qty: <%=item.Qty%>
+                            <%if(item.Qty> 0){%>
+                                Qty: <%=item.Qty%>
+                                    <%}else{%>
+                                        Out of Stock
+                                        <%}%>
                         </span>
                 </span>
 
                 <%if(!Admin){%>
-                    <a href="/Customer/Add/<%=item.id%>"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">Add
-                        to cart</a>
+                    <a class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
+                        focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600
+                        dark:hover:bg-blue-700 dark:focus:ring-blue-800 <%=item.Qty <=0 ? 'hidden' :''%>">
+                        Add
+                        to cart
+                    </a>
                     <%}%>
                         <% if(Admin) {%>
                             <a href="/Delete/Product/<%=item.id%>"

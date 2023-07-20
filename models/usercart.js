@@ -17,11 +17,11 @@ module.exports = (sequelize, DataTypes) => {
         },
       });
     }
-    static getProducts(userId) {
+    static getProducts(userId, status) {
       return this.findAll({
         where: {
           userId,
-          isPurchased: false,
+          isPurchased: status,
         },
       });
     }
@@ -32,11 +32,11 @@ module.exports = (sequelize, DataTypes) => {
         },
       });
     }
-    static updatePurchase(userId, id) {
+    updatePurchase(userId, productId) {
       return this.update({
         where: {
           userId,
-          id,
+          productId,
         },
         isPurchased: true,
       });

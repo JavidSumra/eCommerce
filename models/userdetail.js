@@ -20,6 +20,12 @@ module.exports = (sequelize, DataTypes) => {
     static getAllUser() {
       return this.findAll({});
     }
+    updateData(name, email) {
+      return this.update({
+        email,
+        name,
+      });
+    }
   }
   UserDetail.init(
     {
