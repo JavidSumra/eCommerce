@@ -197,10 +197,10 @@ app.get("/SeeItem/:id", async (req, res) => {
 
 app.get(
   "/Cart",
-  connectEnsure.ensureLoggedIn({ redirectTo: "/" }),
+  connectEnsure.ensureLoggedIn({ redirectTo: "/User/Login" }),
   async (req, res) => {
     try {
-      let getCart = await Cart.getProducts(String(req.user.id));
+      let getCart = await Cart.getProducts(String(req.user.id), false);
       let itemsList = [];
       for (let i = 0; i < getCart.length; i++) {
         let item = await Product.findByPk(getCart[i].productId);
@@ -213,7 +213,24 @@ app.get(
     }
   }
 );
-
+app.get(
+  "/User/Purchase",
+  connectEnsure.ensureLoggedIn({ redirectTo: "/" }),
+  async (req, res) => {
+    try {
+      let getCart = await Cart.getProducts(String(req.user.id), true);
+      let purchasedItem = [];
+      for (let i = 0; i < getCart.length; i++) {
+        let item = await Product.findByPk(getCart[i].productId);
+        purchasedItem.push(item);
+      }
+      // console.log(purchasedItem);
+      res.render("PurchaseHistory", { Purchase: purchasedItem });
+    } catch (error) {
+      console.log("Error While Opening Purchase History:", error);
+    }
+  }
+);
 app.get(
   "/Customer/Add/:id",
   connectEnsure.ensureLoggedIn({ redirectTo: "/" }),
@@ -231,6 +248,21 @@ app.get(
   }
 );
 
+app.get(
+  "/Customer/Buy/:id",
+  connectEnsure.ensureLoggedIn({ redirectTo: "/User/Login" }),
+  async (req, res) => {
+    try {
+      let itemDetail = await Product.findByPk(req.params.id);
+      let updatedQty = itemDetail.Qty - 1;
+      await itemDetail.updateProductQty(updatedQty);
+      await Cart.updatePurchase(req.user.id, req.params.id);
+      res.redirect("back");
+    } catch (error) {
+      console.log(`Error During Buy Operation : ${error}`);
+    }
+  }
+);
 app.post(
   "/User/LoginData",
   passport.authenticate("local", {

@@ -32,6 +32,15 @@ module.exports = (sequelize, DataTypes) => {
         },
       });
     }
+    static updatePurchase(userId, id) {
+      return this.update({
+        where: {
+          userId,
+          id,
+        },
+        isPurchased: true,
+      });
+    }
   }
   UserCart.init(
     {

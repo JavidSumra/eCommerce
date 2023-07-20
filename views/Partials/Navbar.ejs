@@ -7,17 +7,17 @@
         <div class="flex md:order-2">
 
             <% if(!User?.name){%>
-                <a href="/User/Login" class="max-[767px]:hidden">
+                <a href="/User/Login" class="hidden md:block">
                     <button type="button"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Login</button></a>
                 <%}else{%>
-                    <a href="/User/Logout" class="max-[767px]:hidden">
+                    <a href="/User/Logout" class="hidden md:block">
                         <button type="button"
                             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Logout</button></a>
                     <%if(User?.isAdmin){%>
-                        <a href="/dash" class="max-[767px]:hidden">
+                        <a href="/dash" class="hidden md:block mx-4">
                             <button type="button"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mx-10">
                                 Dashboard</button></a>
@@ -48,7 +48,7 @@
                         Cart</a>
                 </li>
                 <li>
-                    <a href="#"
+                    <a href="/User/Purchase"
                         class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Purchase
                         History</a>
                 </li>
@@ -57,18 +57,18 @@
                         class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Profile</a>
                 </li>
                 <% if(!User?.name){%>
-                    <li class="min-[767px]:hidden">
+                    <li class="md:hidden block">
                         <a href="/User/Login"
                             class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Login</a>
                     </li>
                     <%}else{%>
-                        <li class="min-[767px]:hidden">
+                        <li class="md:hidden block">
                             <a href="/User/Logout"
                                 class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Logout</a>
                         </li>
                         <%}%>
                             <% if(User?.isAdmin){%>
-                                <li class="min-[767px]:hidden">
+                                <li class="md:hidden block">
                                     <a href="/dash"
                                         class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Dashboard</a>
                                 </li>

@@ -28,6 +28,11 @@ module.exports = (sequelize, DataTypes) => {
         },
       });
     }
+    updateProductQty(Qty) {
+      return this.update({
+        Qty,
+      });
+    }
   }
   ProductDetail.init(
     {
