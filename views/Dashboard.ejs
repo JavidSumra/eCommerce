@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <%-include ("./Partials/AdminNav.ejs",{Title:"Dashboard"})%>
+        <%-include ("./Partials/Notification.ejs")%>
+            <div class="m-10">
+                <div class=" p-4 md:mt-20 mt-20  sm:ml-64 max-w-4xl  mx-auto ">
+                    <div class="flex items-center justify-around flex-wrap ">
+                        <div
+                            class="flex items-center justify-between bg-gray-200 rounded p-2 shadow-md text-xl font-bold hover:shadow-lg duration-100 cursor-pointer max-[600px]:m-3">
+                            <div class="border-r p-2 border-gray-600 text-4xl"><ion-icon
+                                    name="person-outline"></ion-icon></div>
+                            <div class="p-2">
+                                <%=noUser%>
+                            </div>
+                        </div>
+                        <div
+                            class="flex items-center justify-between bg-gray-200 rounded p-2 shadow-md text-xl font-bold hover:shadow-lg duration-100 cursor-pointer max-[600px]:m-3">
+                            <div class="border-r p-2 border-gray-600 text-4xl"><ion-icon
+                                    name="bag-check-outline"></ion-icon>
+                            </div>
+                            <div class="p-2">
+                                <%=noProduct%>
+                            </div>
+                        </div>
+                        <div
+                            class="flex items-center justify-between bg-gray-200 rounded p-2 shadow-md text-xl font-bold hover:shadow-lg duration-100 cursor-pointer max-[600px]:m-3">
+                            <div class="border-r p-2 border-gray-600 text-4xl"><ion-icon
+                                    name="pricetags-outline"></ion-icon>
+                            </div>
+                            <div class="p-2">
+                                <%=noBanner%>
+                            </div>
+                        </div>
+                        <div
+                            class="flex items-center justify-between bg-gray-200 rounded p-2 shadow-md text-xl font-bold hover:shadow-lg duration-100 cursor-pointer max-[600px]:m-3">
+                            <div class="border-r p-2 border-gray-600 text-4xl"><ion-icon
+                                    name="analytics-outline"></ion-icon>
+                            </div>
+                            <div class="p-2">300 Rs</div>
+                        </div>
+                        <%-include ("./Bill.ejs")%>
+                    </div>
+                </div>
+            </div>
+</body>
+
+</html>

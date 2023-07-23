@@ -99,6 +99,8 @@ app.use(function (request, response, next) {
   next();
 });
 
+let today = new Date().toLocaleDateString("en-In");
+
 app.get("/", async (req, res) => {
   let getProductList = await Product.getAllProduct();
   let getBanners = await Banner.getAllBanners();
@@ -130,13 +132,6 @@ app.get("/User/Login", (req, res) => {
 app.get("/User/Signup", (req, res) => {
   res.render("Signup");
 });
-app.get(
-  "/Dash",
-  connectEnsure.ensureLoggedIn({ redirectTo: "/User/Login" }),
-  (req, res) => {
-    res.render("AdminPanel", { title: "Dashboard" });
-  }
-);
 app.get("/Dash/UserData", async (req, res) => {
   try {
     let userData = await User.getAllUser();
@@ -145,6 +140,7 @@ app.get("/Dash/UserData", async (req, res) => {
     console.log(`Error while fetching user Data:${error}`);
   }
 });
+
 app.get("/Dash/AddProduct", (req, res) => {
   res.render("ProductForm");
 });
@@ -252,11 +248,31 @@ app.get(
       let createCartItem = await Cart.create({
         productId: req.params.id,
         userId: req.user.id,
+        date: today,
       });
       console.log(createCartItem);
       res.redirect("back");
     } catch (error) {
       console.log(`Failed to Create Cart:${error}`);
+    }
+  }
+);
+
+app.get(
+  "/Admin/Dash",
+  connectEnsure.ensureLoggedIn({ redirectTo: "/User/login" }),
+  async (req, res) => {
+    try {
+      let users = await User.findAll();
+      let products = await Product.findAll();
+      let banners = await Banner.findAll();
+      res.render("Dashboard", {
+        noUser: users.length,
+        noProduct: products.length,
+        noBanner: banners.length,
+      });
+    } catch (error) {
+      console.log(`Error while Opening Dashboard:${error}`);
     }
   }
 );
