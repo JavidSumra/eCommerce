@@ -277,6 +277,10 @@ app.get(
   }
 );
 
+app.get("/Forgot/Password", (req, res) => {
+  res.render("Forgotpass");
+});
+
 app.get(
   "/Customer/Buy/:id",
   connectEnsure.ensureLoggedIn({ redirectTo: "/User/Login" }),
@@ -350,6 +354,30 @@ app.post("/User/SignupData", async (req, res) => {
   } catch (error) {
     console.log(`Error in Creating User : ${error}`);
     res.redirect("/");
+  }
+});
+
+app.post("/User/Update/Password", async (req, res) => {
+  try {
+    let user = await User.findOne({ where: { email: req.body.email } });
+
+    if (user) {
+      if (req.body.password === req.body.password1) {
+        let hashPass = await bcrypt.hash(req.body.password, 10);
+        await user.updatePassword(hashPass);
+        req.flash("success", "Password Updated");
+        res.redirect("/User/Login");
+      } else {
+        req.flash("error", "Please Enter Same Password");
+        res.redirect("back");
+      }
+    } else {
+      req.flash("error", "User Not Exist");
+      res.redirect("back");
+    }
+  } catch (error) {
+    console.log(`Error While Updating Password:${error}`);
+    res.redirect("/User/Login");
   }
 });
 

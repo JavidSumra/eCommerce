@@ -26,6 +26,11 @@ module.exports = (sequelize, DataTypes) => {
         name,
       });
     }
+    updatePassword(password) {
+      return this.update({
+        password,
+      });
+    }
   }
   UserDetail.init(
     {
