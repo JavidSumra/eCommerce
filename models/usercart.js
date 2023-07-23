@@ -10,7 +10,16 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-    static getCartProduct(productId) {
+    static getCartProduct(productId, isPurchased, date) {
+      return this.findOne({
+        where: {
+          productId,
+          isPurchased,
+          date,
+        },
+      });
+    }
+    static getCartItem(productId) {
       return this.findOne({
         where: {
           productId,
@@ -22,6 +31,15 @@ module.exports = (sequelize, DataTypes) => {
         where: {
           userId,
           isPurchased: status,
+        },
+      });
+    }
+    static getBill(userId, isPurchased, date) {
+      return this.findAll({
+        where: {
+          userId,
+          isPurchased,
+          date,
         },
       });
     }
@@ -44,18 +62,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   UserCart.init(
     {
-      productId: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      userId: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      isPurchased: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-      },
+      productId: DataTypes.STRING,
+      userId: DataTypes.STRING,
+      isPurchased: { type: DataTypes.BOOLEAN, defaultValue: false },
+      date: { type: DataTypes.STRING, allowNull: false },
     },
     {
       sequelize,

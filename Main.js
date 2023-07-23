@@ -182,7 +182,7 @@ app.get(
 app.get("/SeeItem/:id", async (req, res) => {
   try {
     let getProductDetail = await Product.findByPk(req.params.id);
-    let getCart = await Cart.getCartProduct(req.params.id);
+    let getCart = await Cart.getCartItem(req.params.id);
     let isAdded = getCart ? true : false;
 
     res.render("ProductDetail", { Detail: getProductDetail, isAdded });
@@ -221,7 +221,7 @@ app.get(
         purchasedItem.push(item);
       }
       // console.log(purchasedItem);
-      res.render("PurchaseHistory", { Purchase: purchasedItem });
+      res.render("PurchaseHistory", { Purchase: purchasedItem, Cart: getCart });
     } catch (error) {
       console.log("Error While Opening Purchase History:", error);
     }
@@ -266,10 +266,18 @@ app.get(
       let users = await User.findAll();
       let products = await Product.findAll();
       let banners = await Banner.findAll();
+      let getCart = await Cart.getBill(String(req.user.id), true, today);
+      let purchasedItem = [];
+      for (let i = 0; i < getCart.length; i++) {
+        let item = await Product.findByPk(getCart[i].productId);
+        purchasedItem.push(item);
+      }
       res.render("Dashboard", {
         noUser: users.length,
         noProduct: products.length,
         noBanner: banners.length,
+        Cart: getCart,
+        Product: purchasedItem,
       });
     } catch (error) {
       console.log(`Error while Opening Dashboard:${error}`);
@@ -289,7 +297,7 @@ app.get(
       let itemDetail = await Product.findByPk(req.params.id);
       let updatedQty = itemDetail.Qty - 1;
       await itemDetail.updateProductQty(updatedQty);
-      let CartProduct = await Cart.getCartProduct(req.params.id);
+      let CartProduct = await Cart.getCartProduct(req.params.id, false, today);
       let updatedProduct = await CartProduct.updatePurchase(
         String(req.user.id),
         String(req.params.id)
@@ -405,6 +413,7 @@ app.post(
         Qty: qty,
         Type: category,
         userId: req.user.id,
+        date: today,
       });
       console.log(createProduct);
       console.log("Created Successfully");

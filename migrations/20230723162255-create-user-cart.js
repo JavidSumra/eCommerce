@@ -18,6 +18,9 @@ module.exports = {
       isPurchased: {
         type: Sequelize.BOOLEAN
       },
+      date: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

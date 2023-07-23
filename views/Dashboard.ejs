@@ -39,14 +39,8 @@
                                 <%=noBanner%>
                             </div>
                         </div>
-                        <div
-                            class="flex items-center justify-between bg-gray-200 rounded p-2 shadow-md text-xl font-bold hover:shadow-lg duration-100 cursor-pointer max-[600px]:m-3">
-                            <div class="border-r p-2 border-gray-600 text-4xl"><ion-icon
-                                    name="analytics-outline"></ion-icon>
-                            </div>
-                            <div class="p-2">300 Rs</div>
-                        </div>
-                        <%-include ("./Bill.ejs")%>
+
+                        <%-include ("./Bill.ejs",{Cart,Product})%>
                     </div>
                 </div>
             </div>

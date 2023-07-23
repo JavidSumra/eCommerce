@@ -15,7 +15,7 @@
     <%-include ("./Partials/Navbar.ejs",{User})%>
         <%-include ("./Partials/Slider.ejs",{Banners:BanerList})%>
             <%-include ("./Partials/Category.ejs")%>
-                <div class="flex items-center justify-between flex-wrap m-8">
+                <div class="flex items-center justify-around flex-wrap m-8">
                     <%-include ("./Partials/Card.ejs",{Admin:false,List:getProductList})%>
                 </div>
 </body>
